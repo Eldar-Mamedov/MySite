@@ -1,7 +1,7 @@
 package com.epam.mysite.engine.database.repository.converter;
 
 
-import com.epam.mysite.converter.ConverterException;
+import com.epam.mysite.core.exception.converter.ConverterException;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.ResultSet;
