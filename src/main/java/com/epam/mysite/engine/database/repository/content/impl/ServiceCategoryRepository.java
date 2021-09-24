@@ -1,9 +1,9 @@
-package com.epam.mysite.engine.database.repository.content.api;
+package com.epam.mysite.engine.database.repository.content.impl;
 
 
 import com.epam.mysite.engine.database.DataBaseConnection;
 import com.epam.mysite.engine.database.queries.content.ServiceCategoryQuery;
-import com.epam.mysite.engine.database.repository.content.impl.IServiceCategoryRepository;
+import com.epam.mysite.engine.database.repository.content.api.IServiceCategoryRepository;
 import com.epam.mysite.engine.database.repository.converter.EntityConverter;
 import com.epam.mysite.entity.content.ServiceCategory;
 import lombok.extern.log4j.Log4j;

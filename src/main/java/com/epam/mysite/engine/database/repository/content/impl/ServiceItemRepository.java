@@ -1,10 +1,11 @@
-package com.epam.mysite.engine.database.repository.content.api;
+package com.epam.mysite.engine.database.repository.content.impl;
+
 
 import com.epam.mysite.engine.database.DataBaseConnection;
-import com.epam.mysite.engine.database.queries.content.HeaderQuery;
-import com.epam.mysite.engine.database.repository.content.impl.IHeaderRepository;
+import com.epam.mysite.engine.database.queries.content.ServiceItemQuery;
+import com.epam.mysite.engine.database.repository.content.api.IServiceItemRepository;
 import com.epam.mysite.engine.database.repository.converter.EntityConverter;
-import com.epam.mysite.entity.content.Header;
+import com.epam.mysite.entity.content.ServiceItem;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;
@@ -15,33 +16,36 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Log4j
-public class HeaderRepository implements IHeaderRepository {
+public class ServiceItemRepository implements IServiceItemRepository {
     private final Connection connection;
 
-    public HeaderRepository() {
+    public ServiceItemRepository() {
         connection = DataBaseConnection.getInstance().getConnection();
     }
+
     @Override
-    public List<Header> findAll() {
+    public List<ServiceItem> findAllBySubcategory(String subcategory) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Header> headerList = new LinkedList<>();
+        List<ServiceItem> serviceItems = new LinkedList<>();
         try {
-            ps = connection.prepareStatement(HeaderQuery.GET_ALL.getQuery());
-            ps.setString(1,System.getProperty("locale"));
+            ps = connection.prepareStatement(ServiceItemQuery.GET_ALL_BY_SUBCATEGORY.getQuery());
+            ps.setString(1, subcategory);
+            ps.setString(2, System.getProperty("locale"));
             rs = ps.executeQuery();
-            if(rs.next()){
-                Header header = EntityConverter.convert(rs,Header.class);
-                headerList.add(header);
+            if (rs.next()) {
+                ServiceItem serviceItem = EntityConverter.convert(rs, ServiceItem.class);
+                serviceItems.add(serviceItem);
             }
         } catch (SQLException exception) {
             log.info(exception.toString());
-        }finally {
+        } finally {
             closePreparedStatement(ps);
             closeResultSet(rs);
         }
-        return headerList;
+        return serviceItems;
     }
+
     private void closePreparedStatement(PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {

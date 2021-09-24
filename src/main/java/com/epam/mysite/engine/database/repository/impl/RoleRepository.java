@@ -1,7 +1,7 @@
-package com.epam.mysite.engine.database.repository.api;
+package com.epam.mysite.engine.database.repository.impl;
 
 import com.epam.mysite.engine.database.DataBaseConnection;
-import com.epam.mysite.engine.database.repository.impl.IRoleRepository;
+import com.epam.mysite.engine.database.repository.api.IRoleRepository;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;

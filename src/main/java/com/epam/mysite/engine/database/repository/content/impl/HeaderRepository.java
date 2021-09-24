@@ -1,49 +1,47 @@
-package com.epam.mysite.engine.database.repository.api;
-
+package com.epam.mysite.engine.database.repository.content.impl;
 
 import com.epam.mysite.engine.database.DataBaseConnection;
-import com.epam.mysite.engine.database.queries.UserQuery;
-import com.epam.mysite.engine.database.repository.impl.IUserRepository;
-import com.epam.mysite.entity.User;
+import com.epam.mysite.engine.database.queries.content.HeaderQuery;
+import com.epam.mysite.engine.database.repository.content.api.IHeaderRepository;
+import com.epam.mysite.engine.database.repository.converter.EntityConverter;
+import com.epam.mysite.entity.content.Header;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import static com.epam.mysite.engine.database.repository.converter.EntityConverter.convert;
-
+import java.util.LinkedList;
+import java.util.List;
 
 @Log4j
-public class UserRepository implements IUserRepository {
+public class HeaderRepository implements IHeaderRepository {
     private final Connection connection;
 
-    public UserRepository() {
+    public HeaderRepository() {
         connection = DataBaseConnection.getInstance().getConnection();
     }
-
     @Override
-    public User findUserByLogin(String login) {
+    public List<Header> findAll() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        User user = null;
+        List<Header> headerList = new LinkedList<>();
         try {
-            ps = connection.prepareStatement(UserQuery.GET_USER_BY_LOGIN.getQuery());
-            ps.setString(1, login);
+            ps = connection.prepareStatement(HeaderQuery.GET_ALL.getQuery());
+            ps.setString(1,System.getProperty("locale"));
             rs = ps.executeQuery();
-            if (rs.next()) {
-                user = convert(rs, User.class);
+            if(rs.next()){
+                Header header = EntityConverter.convert(rs,Header.class);
+                headerList.add(header);
             }
-        } catch (SQLException e) {
-            log.info(e.toString());
-        } finally {
+        } catch (SQLException exception) {
+            log.info(exception.toString());
+        }finally {
             closePreparedStatement(ps);
             closeResultSet(rs);
         }
-        return user;
+        return headerList;
     }
-
     private void closePreparedStatement(PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {

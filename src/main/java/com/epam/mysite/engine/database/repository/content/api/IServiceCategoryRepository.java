@@ -1,4 +1,4 @@
-package com.epam.mysite.engine.database.repository.content.impl;
+package com.epam.mysite.engine.database.repository.content.api;
 
 import com.epam.mysite.entity.content.ServiceCategory;
 

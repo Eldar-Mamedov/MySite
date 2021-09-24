@@ -1,49 +1,47 @@
-package com.epam.mysite.engine.database.repository.content.api;
+package com.epam.mysite.engine.database.repository.impl;
 
 
 import com.epam.mysite.engine.database.DataBaseConnection;
-import com.epam.mysite.engine.database.queries.content.ServiceItemQuery;
-import com.epam.mysite.engine.database.repository.content.impl.IServiceItemRepository;
-import com.epam.mysite.engine.database.repository.converter.EntityConverter;
-import com.epam.mysite.entity.content.ServiceItem;
+import com.epam.mysite.engine.database.queries.UserQuery;
+import com.epam.mysite.engine.database.repository.api.IUserRepository;
+import com.epam.mysite.entity.User;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+
+import static com.epam.mysite.engine.database.repository.converter.EntityConverter.convert;
+
 
 @Log4j
-public class ServiceItemRepository implements IServiceItemRepository {
+public class UserRepository implements IUserRepository {
     private final Connection connection;
 
-    public ServiceItemRepository() {
+    public UserRepository() {
         connection = DataBaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public List<ServiceItem> findAllBySubcategory(String subcategory) {
+    public User findUserByLogin(String login) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<ServiceItem> serviceItems = new LinkedList<>();
+        User user = null;
         try {
-            ps = connection.prepareStatement(ServiceItemQuery.GET_ALL_BY_SUBCATEGORY.getQuery());
-            ps.setString(1, subcategory);
-            ps.setString(2, System.getProperty("locale"));
+            ps = connection.prepareStatement(UserQuery.GET_USER_BY_LOGIN.getQuery());
+            ps.setString(1, login);
             rs = ps.executeQuery();
             if (rs.next()) {
-                ServiceItem serviceItem = EntityConverter.convert(rs, ServiceItem.class);
-                serviceItems.add(serviceItem);
+                user = convert(rs, User.class);
             }
-        } catch (SQLException exception) {
-            log.info(exception.toString());
+        } catch (SQLException e) {
+            log.info(e.toString());
         } finally {
             closePreparedStatement(ps);
             closeResultSet(rs);
         }
-        return serviceItems;
+        return user;
     }
 
     private void closePreparedStatement(PreparedStatement preparedStatement) {
