@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+.maintenance > * {
+    margin-bottom: 1rem;
+}
+
+.title {
+    margin-top: 40px;
+    font-size: 2em;
+    color: black;
+}
+
+.text {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.maintenance li {
+    list-style: inside;
+    margin-bottom: 10px;
+}

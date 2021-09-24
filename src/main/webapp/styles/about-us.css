@@ -1,0 +1,32 @@
+.info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info__item {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.item__container {
+    display: flex;
+    justify-content: center;
+}
+
+.item__container > * {
+    padding: 0 15px;
+}
+
+.item__img {
+    height: 280px;
+    width: 420px;
+    display: inline-block;
+}
+
+.item__text > p {
+    margin: 10px 0;
+}
+
+.item__text .first {
+    margin: 0;
+}
