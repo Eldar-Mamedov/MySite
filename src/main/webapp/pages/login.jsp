@@ -15,7 +15,7 @@
 <fmt:setBundle basename="login" var="log"/>
 <html lang="${current_lang}">
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/login.css">
@@ -27,14 +27,14 @@
     <div class="container">
         <div class="center">
             <h1><fmt:message bundle="${log}" key="title_text"/></h1>
-            <form method="post">
+            <form success="<fmt:message bundle="${log}" key="success_message"/>" action="${pageContext.request.contextPath}/login">
                 <div class="txt_field">
-                    <input type="text" required>
+                    <input type="text" name="login" required>
                     <span></span>
                     <label><fmt:message bundle="${log}" key="username_text"/></label>
                 </div>
                 <div class="txt_field">
-                    <input type="text" required>
+                    <input type="password" name="password" required>
                     <span></span>
                     <label><fmt:message bundle="${log}" key="password_text"/></label>
                 </div>
@@ -48,5 +48,7 @@
     </div>
     <jsp:include page="/footer"/>
 </div>
+<script src="scripts/lib/jquery.js"></script>
+<script src="scripts/login.js"></script>
 </body>
 </html>
