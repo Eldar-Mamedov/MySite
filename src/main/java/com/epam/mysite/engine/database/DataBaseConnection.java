@@ -2,14 +2,10 @@ package com.epam.mysite.engine.database;
 
 import lombok.extern.log4j.Log4j;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 @Log4j
 public class DataBaseConnection {
@@ -17,11 +13,11 @@ public class DataBaseConnection {
     private Connection connection;
 
     private DataBaseConnection() {
-        try (InputStream inputStream = new FileInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("application.properties")).getPath())) {
-            Properties properties = new Properties();
-            properties.load(inputStream);
-            connection = getConnection(properties.getProperty("connection.url"));
-        } catch (SQLException | IOException e) {
+        try {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            connection = getConnection(resourceBundle.getString("connection.url"));
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             log.info(e.toString());
         }
     }

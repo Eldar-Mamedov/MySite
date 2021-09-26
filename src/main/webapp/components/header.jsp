@@ -29,7 +29,7 @@
                 </div>
             </a>
             </li>
-            <li><a href="#" class="a_parent">
+            <li><a href="${pageContext.request.contextPath}/price" class="a_parent ${price}">
                 <div class="wrap">
 					<span class="icon">
 					<i class="fas fa-donate" aria-hidden="true"></i>
@@ -37,111 +37,6 @@
                     <span class="text"><fmt:message bundle="${head}" key="price"/></span>
                 </div>
             </a>
-            </li>
-            <li><a href="#" class="a_parent">
-                <div class="wrap">
-					<span class="icon">
-					<i class="fab fa-gg-circle" aria-hidden="true"></i>
-					</span>
-                    <span class="text"><fmt:message bundle="${head}" key="services"/></span>
-                </div>
-            </a>
-                <div class="dd_menu">
-                    <ul>
-                        <li>
-                            <a href="#" class="dd_menu_a">
-                                <div class="wrap">
-                                    <span class="text">Nail Service</span>
-                                </div>
-                            </a>
-                            <div class="dd_submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Running</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Biking</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Football</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Swimmer</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#" class="dd_menu_a">
-                                <div class="wrap">
-                                    <span class="text">Barbershop</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dd_menu_a">
-                                <div class="wrap">
-                                    <span class="text">Make-up</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dd_menu_a">
-                                <div class="wrap">
-                                    <span class="text">Depilation</span>
-                                </div>
-                            </a>
-                            <div class="dd_submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Running</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Biking</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Football</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="wrap">
-                                                <span class="text">Swimmer</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li><a href="${pageContext.request.contextPath}/contacts" class="a_parent ${contacts}">
                 <div class="wrap">
@@ -151,7 +46,7 @@
                     <span class="text"><fmt:message bundle="${head}" key="contacts"/></span>
                 </div>
             </a></li>
-            <li><a href="#" class="a_parent">
+            <li><a href="${pageContext.request.contextPath}/reviews" class="a_parent ${reviews}">
                 <div class="wrap">
 					<span class="icon">
 					 <i class="fas fa-comments" aria-hidden="true"></i>
@@ -171,10 +66,17 @@
             </li>
         </ul>
     </div>
-    <div class="user">
-        <i class="fas fa-user"></i>
+    <div class="burger-menu">
+        <input type="checkbox" id="check_menu">
+        <label class="lab" for="check_menu"></label>
+        <div class="burger-line first"></div>
+        <div class="burger-line second"></div>
+        <div class="burger-line third"></div>
+        <div class="burger-line fourth"></div>
+        <nav class="main-menu">
+            <c:forEach items="${menu_items}" var="item">
+                <a href="${item.key}">${item.value}</a>
+            </c:forEach>
+        </nav>
     </div>
 </div>
-
-
-<script src="scripts/header.js"></script>

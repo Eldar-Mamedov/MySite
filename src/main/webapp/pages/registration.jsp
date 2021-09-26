@@ -15,7 +15,7 @@
 <fmt:setBundle basename="registration" var="reg"/>
 <html lang="${current_lang}">
 <head>
-    <title>Title</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/registration.css">
@@ -27,41 +27,41 @@
     <div class="container">
         <div class="registration">
             <div class="title"><fmt:message bundle="${reg}" key="registr"/></div>
-            <form action="#">
+            <form success="<fmt:message bundle="${reg}" key="register_message"/>" action="${pageContext.request.contextPath}/registration" method="post">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="f_name"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="f_name_text"/>">
+                        <input type="text" name="name" placeholder="<fmt:message bundle="${reg}" key="f_name_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="l_name"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="l_name_text"/>">
+                        <input type="text" name="surname" placeholder="<fmt:message bundle="${reg}" key="l_name_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="user_name"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="user_name_text"/>">
+                        <input type="text" name="login" placeholder="<fmt:message bundle="${reg}" key="user_name_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="em"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="em_text"/>">
+                        <input type="text" name="email" placeholder="<fmt:message bundle="${reg}" key="em_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="ph"/></span>
-                        <input type="tel" placeholder="<fmt:message bundle="${reg}" key="ph_text"/>">
+                        <input type="tel" name="phone" placeholder="<fmt:message bundle="${reg}" key="ph_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="pass"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="pass_text"/>">
+                        <input type="password" name="password" placeholder="<fmt:message bundle="${reg}" key="pass_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="conf_pass"/></span>
-                        <input type="text" placeholder="<fmt:message bundle="${reg}" key="conf_pass_text"/>">
+                        <input type="password" name="confirm_password" placeholder="<fmt:message bundle="${reg}" key="conf_pass_text"/>" required>
                     </div>
                 </div>
                 <div class="gender-details">
-                    <input type="radio" name="gender" id="dot-1">
-                    <input type="radio" name="gender" id="dot-2">
-                    <input type="radio" name="gender" id="dot-3">
+                    <input type="radio" name="gender" value="male" id="dot-1">
+                    <input type="radio" name="gender" value="female" id="dot-2">
+                    <input type="radio" name="gender" value="prefer" id="dot-3">
                     <span class="gender-title"><fmt:message bundle="${reg}" key="gender"/></span>
                     <div class="category">
                         <label for="dot-1">
@@ -86,5 +86,7 @@
     </div>
     <jsp:include page="/footer"/>
 </div>
+<script src="scripts/lib/jquery.js"></script>
+<script src="scripts/registration.js"></script>
 </body>
 </html>
