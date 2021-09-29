@@ -45,15 +45,15 @@
                                         </div>
                                     </c:forEach>
                                     <div class="buttons">
-                                        <button id="process" action="${pageContext.request.contextPath}/process-order">
+                                        <button class="process" action="${pageContext.request.contextPath}/process-order">
                                             <fmt:message bundle="${adm}" key="process_btn"/></button>
-                                        <button id="cancelled" parent="${item.parentOrderId}"
+                                        <button class="cancelled" parent="${item.parentOrderId}"
                                                 action="${pageContext.request.contextPath}/cancel-order"><fmt:message
                                                 bundle="${adm}" key="cancel_btn"/></button>
                                     </div>
                                     <div class="date">
                                         <span><fmt:message bundle="${adm}" key="date_service"/></span>
-                                        <input id="datetime" type="datetime-local"
+                                        <input class="datetime" type="datetime-local"
                                                message="<fmt:message bundle="${adm}" key="error_date"/>">
                                     </div>
                                 </form>
@@ -63,8 +63,8 @@
                             <div class="item_cont">
                                 <c:forEach items="${item.orderItemEntities}" var="item">
                                     <div class="item_det">
-                                        <span>Услуга: ${item.serviceName}</span>
-                                        <span>Работник: ${item.employeeName}</span>
+                                        <span><fmt:message bundle="${adm}" key="service"/>: ${item.serviceName}</span>
+                                        <span><fmt:message bundle="${adm}" key="emp"/>: ${item.employeeName}</span>
                                     </div>
                                 </c:forEach>
                             </div>

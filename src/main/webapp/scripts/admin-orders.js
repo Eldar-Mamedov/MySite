@@ -8,17 +8,19 @@ $(".item_btn").on("click", function (event) {
     }
 })
 
-$("#process").on("click", function (event) {
+$(".process").on("click", function (event) {
     event.preventDefault();
     let url = $(this).attr("action");
-    let date = $("#datetime").val();
+    let parentButton = $(this).parent();
+    let divDate = $(parentButton).next();
+    let date = $(divDate).children().last().val();
     if (!date || Date.now() >= Date.parse(date)) {
-        let errorMessage = $("#datetime").attr("message");
+        let errorMessage = $(divDate).children().last().attr("message");
         alert(errorMessage);
         return;
     }
     if (!isItemCorrect()) {
-        let errorMessage = $("select").attr("message");
+        let errorMessage = $("select:visible").attr("message");
         alert(errorMessage);
         return;
     }
@@ -31,7 +33,7 @@ $("#process").on("click", function (event) {
 
 function getItems() {
     let items = []
-    $("select").each(function () {
+    $("select:visible").each(function () {
         let item = {}
         item.orderId = $(this).attr("id");
         item.employeeId = $(this).val();
@@ -42,7 +44,7 @@ function getItems() {
 
 function isItemCorrect() {
     let isCorrect = true;
-    $("select").each(function () {
+    $("select:visible").each(function () {
         if ($(this).val() === "default") {
             isCorrect = false;
         }
@@ -50,7 +52,7 @@ function isItemCorrect() {
     return isCorrect;
 }
 
-$("#cancelled").on("click", function (event) {
+$(".cancelled").on("click", function (event) {
     event.preventDefault();
     let parentOrderId = $(this).attr("parent");
     let url = $(this).attr("action");
