@@ -36,6 +36,9 @@ public class OrdersController implements IOrdersController {
                 }
                 List<OrderDetailsEntity> orderDetailsEntities = ordersRepository.findOrderDetails(user, clientOrderMainPartEntity.getParentOrderId());
                 for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntities) {
+                    if (StringUtils.isNullOrEmpty(orderDetailsEntity.getFullName())) {
+                        orderDetailsEntity.setFullName(ResourceBundle.getBundle("history", new Locale(System.getProperty("locale"))).getString("emp_name"));
+                    }
                     clientOrderMainPartEntity.putOrderDetail(orderDetailsEntity.getCategoryName(), orderDetailsEntity);
                 }
             }
@@ -106,6 +109,7 @@ public class OrdersController implements IOrdersController {
                 try {
                     adminOrderItemEntities = ordersRepository.findAdminOrderItemsByParentOrderId(entity.getParentOrderId());
                     for (AdminOrderItemEntity adminOrderItemEntity : adminOrderItemEntities) {
+
                         adminOrderItemEntity.setEmployeeEntities(employeeRepository.findAllEmployeesByServiceItemId(adminOrderItemEntity.getServiceId()));
                     }
                 } catch (SQLException e) {

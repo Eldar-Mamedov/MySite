@@ -43,7 +43,7 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         User user = RequestConverter.convertFromBody(req, User.class);
         Response response = userController.saveUser(user, Role.valueOf(user.getRole()));
-        if (response.getStatus() == 200 && Role.valueOf(user.getRole()) == Role.Master) {
+        if (response.getStatus() == 201 && Role.valueOf(user.getRole()) == Role.Master) {
             response = employeeController.addSpecialityToEmployee(user);
             response.setStatus(201);
         }

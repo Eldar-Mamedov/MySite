@@ -1,9 +1,7 @@
 package com.epam.mysite.engine.database.queries.content;
 
 public enum OrdersQuery {
-    INSERT_CLIENT_ORDER("INSERT INTO beauty_saloon.orders (date_order, client_id, employee_id, service_item_id, parent_order_id, order_status_id) VALUES (?, (SELECT id FROM _user WHERE login = ?), (select user_id FROM employee_speciality em\n" +
-            "join service_item si on si.id = em.service_item_id\n" +
-            "where si.service_name = ?), (SELECT id from service_item where service_name = ?), ?, (SELECT id from order_status WHERE status = ?));"),
+    INSERT_CLIENT_ORDER("INSERT INTO beauty_saloon.orders (date_order, client_id, service_item_id, parent_order_id, order_status_id) VALUES (?, (SELECT id FROM _user WHERE login = ?), (SELECT id from service_item where service_name = ?), ?, (SELECT id from order_status WHERE status = ?));"),
     GET_MAIN_PART_ORDER_FOR_CLIENT("select o.id, \n" +
             "(\n" +
             "SELECT sc.name from service_item\n" +
@@ -18,20 +16,23 @@ public enum OrdersQuery {
             "\n"),
     GET_ORDER_DETAILS_FOR_CLIENT("select\n" +
             "(\n" +
-            "SELECT sc.name from service_item\n" +
-            "join (SELECT same_item_id from service_item WHERE id = o.id) s on s.same_item_id = service_item.same_item_id\n" +
-            "join service_category sc on sc.id = service_item.category_id\n" +
-            "where service_item.locale = ?\n" +
+            "SELECT name FROM service_category\n" +
+            "join (SELECT category_id from service_item ssi\n" +
+            "join (SELECT service_item.same_item_id FROM service_item\n" +
+            "WHERE o.service_item_id = service_item.id\n" +
+            ") sssi on sssi.same_item_id = ssi.same_item_id\n" +
+            "WHERE locale = ?) ssi on ssi.category_id = service_category.id\n" +
             ") as category_name, \n" +
             "(\n" +
-            "SELECT service_name from service_item\n" +
-            "join (SELECT same_item_id from service_item WHERE id = o.id) s on s.same_item_id = service_item.same_item_id\n" +
-            "join service_category sc on sc.id = service_item.category_id\n" +
-            "where service_item.locale = ?\n" +
+            "SELECT service_name from service_item ssi\n" +
+            "join (SELECT service_item.same_item_id FROM service_item\n" +
+            "WHERE o.service_item_id = service_item.id\n" +
+            ") sssi on sssi.same_item_id = ssi.same_item_id\n" +
+            "WHERE locale = ?\n" +
             ") as service_name, (SELECT CONCAT(name, \" \", surname) FROM _user where id=o.employee_id) as fullname,si.price  from orders o\n" +
             "join _user u on u.id = o.client_id\n" +
             "join service_item si on si.id = o.service_item_id\n" +
-            "where u.login = ? AND o.parent_order_id = ?"),
+            "where u.login = ? AND o.parent_order_id = ?;"),
     GET_ORDER_FOR_MASTER("select\n" +
             "o.id,\n" +
             "(\n" +
@@ -67,11 +68,12 @@ public enum OrdersQuery {
     GET_ORDER_ITEMS_BY_PARENT_ORDER_ID("select\n" +
             "o.id,\n" +
             "(\n" +
-            "SELECT service_name from service_item\n" +
-            "join (SELECT same_item_id from service_item WHERE id = o.id) s on s.same_item_id = service_item.same_item_id\n" +
-            "join service_category sc on sc.id = service_item.category_id\n" +
-            "where service_item.locale = ?\n" +
-            ") service_name,\n" +
+            "SELECT service_name from service_item ssi\n" +
+            "join (SELECT service_item.same_item_id FROM service_item\n" +
+            "WHERE o.service_item_id = service_item.id\n" +
+            ") sssi on sssi.same_item_id = ssi.same_item_id\n" +
+            "WHERE locale = ?\n" +
+            ") as service_name,\n" +
             "(\n" +
             "SELECT CONCAT(u.name, \" \", u.surname) FROM _user u\n" +
             "where id = o.employee_id\n" +

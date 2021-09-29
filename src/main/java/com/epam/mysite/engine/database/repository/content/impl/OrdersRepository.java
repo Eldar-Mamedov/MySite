@@ -41,9 +41,8 @@ public class OrdersRepository implements IOrdersRepository {
                 ps.setTimestamp(1, createOrder.getDateTime());
                 ps.setString(2, user.getLogin());
                 ps.setString(3, service);
-                ps.setString(4, service);
-                ps.setString(5, parentOrderId);
-                ps.setString(6, OrderStatus.IN_PROCESS.name());
+                ps.setString(4, parentOrderId);
+                ps.setString(5, OrderStatus.IN_PROCESS.name());
                 ps.addBatch();
             }
             int[] orders = ps.executeBatch();
