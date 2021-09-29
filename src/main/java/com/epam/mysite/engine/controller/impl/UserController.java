@@ -6,7 +6,9 @@ import com.epam.mysite.domain.enums.Role;
 import com.epam.mysite.domain.webservice.Response;
 import com.epam.mysite.domain.webservice.User;
 import com.epam.mysite.engine.controller.api.IUserController;
+import com.epam.mysite.engine.database.repository.api.IEmployeeRepository;
 import com.epam.mysite.engine.database.repository.api.IUserRepository;
+import com.epam.mysite.engine.database.repository.impl.EmployeeRepository;
 import com.epam.mysite.engine.database.repository.impl.UserRepository;
 
 import java.sql.SQLException;
@@ -30,6 +32,7 @@ public class UserController implements IUserController {
             Pattern.compile("^(male|female|prefer)$");
 
     private final IUserRepository userRepository = new UserRepository();
+    private final IEmployeeRepository employeeRepository = new EmployeeRepository();
     private ResourceBundle registrationBundle;
 
     private User loggedUser;
@@ -44,7 +47,7 @@ public class UserController implements IUserController {
             try {
                 boolean result = userRepository.save(userEntity, role);
                 if (result) {
-                    response.setStatus(200);
+                    response.setStatus(201);
                 }
             } catch (Exception e) {
                 response.setStatus(500);
@@ -90,6 +93,26 @@ public class UserController implements IUserController {
     @Override
     public User getLoggedUser() {
         return loggedUser;
+    }
+
+    @Override
+    public Response deleteUser(List<Integer> userIds) {
+        Response response = new Response();
+        if (!userIds.isEmpty()) {
+            try {
+                boolean result = userRepository.delete(userIds);
+                if (result) {
+                    response.setStatus(200);
+                }
+            } catch (SQLException e) {
+                response.setStatus(500);
+                response.setBody(e.getMessage());
+            }
+        } else {
+            response.setStatus(400);
+            response.setBody(ResourceBundle.getBundle("admin-order", new Locale(System.getProperty("locale"))).getString("empty_ids"));
+        }
+        return response;
     }
 
     private boolean isValidForRegistration(User user, Response response) {

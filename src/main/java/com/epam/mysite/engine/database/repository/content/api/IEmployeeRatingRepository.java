@@ -1,2 +1,4 @@
-package com.epam.mysite.engine.database.repository.content.api;public interface IEmployeeRatingRepository {
+package com.epam.mysite.engine.database.repository.content.api;
+
+public interface IEmployeeRatingRepository {
 }

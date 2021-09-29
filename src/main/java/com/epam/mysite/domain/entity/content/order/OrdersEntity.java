@@ -1,4 +1,4 @@
-package com.epam.mysite.domain.entity.content;
+package com.epam.mysite.domain.entity.content.order;
 
 import com.google.gson.annotations.SerializedName;
 

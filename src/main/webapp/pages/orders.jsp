@@ -17,12 +17,15 @@
     <title>Orders</title>
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/${style}.css">
     <script src="https://kit.fontawesome.com/e983c4e4ff.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrapper">
     <jsp:include page="/header"/>
-    <jsp:include page="/order-content"/>
+    <div class="container">
+        <jsp:include page="/order-content"/>
+    </div>
     <jsp:include page="/footer"/>
 </div>
 </body>

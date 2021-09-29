@@ -18,15 +18,38 @@
     <title>Profile</title>
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/profile.css">
     <script src="https://kit.fontawesome.com/e983c4e4ff.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrapper">
     <jsp:include page="/header"/>
     <div class="container">
-        Profile<br>
-        <fmt:message bundle="${prof}" key="name"/>:${user.getName()}
-        <fmt:message bundle="${prof}" key="lastName"/>:${user.getSurname()}
+        <h1 class="header"><fmt:message bundle="${prof}" key="prof"/></h1>
+        <div class="user-container">
+            <i class="fas fa-user"></i>
+            <div class="user-details">
+                <h3><fmt:message bundle="${prof}" key="info_prof"/>:</h3>
+                <h4><fmt:message bundle="${prof}" key="name"/>:${user.getName()}</h4>
+                <h4><fmt:message bundle="${prof}" key="lastName"/>:${user.getSurname()}</h4>
+                <div class="info_user">
+                    <div class="info_data">
+                        <div class="data">
+                            <h4><fmt:message bundle="${prof}" key="email"/>:${user.getEmail()}</h4>
+                        </div>
+                        <div class="data">
+                            <h4><fmt:message bundle="${prof}" key="login_prof"/>:${user.getLogin()}</h4>
+                        </div>
+                        <div class="data">
+                            <h4><fmt:message bundle="${prof}" key="number_prof"/>:${user.getPhoneNumber()}</h4>
+                        </div>
+                        <div class="data">
+                            <h4><fmt:message bundle="${prof}" key="gender_prof"/>:${user.getGender()}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <jsp:include page="/footer"/>
 </div>

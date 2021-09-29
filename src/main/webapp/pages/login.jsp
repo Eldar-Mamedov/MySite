@@ -38,7 +38,6 @@
                     <span></span>
                     <label><fmt:message bundle="${log}" key="password_text"/></label>
                 </div>
-                <div class="pass"><fmt:message bundle="${log}" key="forgot_password_text"/></div>
                 <input type="submit" value=<fmt:message bundle="${log}" key="bt_login"/>>
                 <div class="signup_link">
                     <fmt:message bundle="${log}" key="member"/> <a href="${pageContext.request.contextPath}/registration"><fmt:message bundle="${log}" key="signup"/></a>

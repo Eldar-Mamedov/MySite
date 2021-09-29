@@ -46,14 +46,14 @@
                     <span class="text"><fmt:message bundle="${head}" key="contacts"/></span>
                 </div>
             </a></li>
-            <li><a href="${pageContext.request.contextPath}/reviews" class="a_parent ${reviews}">
-                <div class="wrap">
-					<span class="icon">
-					 <i class="fas fa-comments" aria-hidden="true"></i>
-					</span>
-                    <span class="text"><fmt:message bundle="${head}" key="reviews"/></span>
-                </div>
-            </a></li>
+<%--            <li><a href="${pageContext.request.contextPath}/reviews" class="a_parent ${reviews}">--%>
+<%--                <div class="wrap">--%>
+<%--					<span class="icon">--%>
+<%--					 <i class="fas fa-comments" aria-hidden="true"></i>--%>
+<%--					</span>--%>
+<%--                    <span class="text"><fmt:message bundle="${head}" key="reviews"/></span>--%>
+<%--                </div>--%>
+<%--            </a></li>--%>
         </ul>
     </div>
     <div class="language_switch">
