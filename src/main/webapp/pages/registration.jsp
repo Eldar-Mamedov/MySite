@@ -27,35 +27,44 @@
     <div class="container">
         <div class="registration">
             <div class="title"><fmt:message bundle="${reg}" key="registr"/></div>
-            <form success="<fmt:message bundle="${reg}" key="register_message"/>" action="${pageContext.request.contextPath}/registration" method="post">
+            <form success="<fmt:message bundle="${reg}" key="register_message"/>"
+                  action="${pageContext.request.contextPath}/registration" method="post">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="f_name"/></span>
-                        <input type="text" name="name" placeholder="<fmt:message bundle="${reg}" key="f_name_text"/>" required>
+                        <input type="text" name="name" placeholder="<fmt:message bundle="${reg}" key="f_name_text"/>"
+                               required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="l_name"/></span>
-                        <input type="text" name="surname" placeholder="<fmt:message bundle="${reg}" key="l_name_text"/>" required>
+                        <input type="text" name="surname" placeholder="<fmt:message bundle="${reg}" key="l_name_text"/>"
+                               required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="user_name"/></span>
-                        <input type="text" name="login" placeholder="<fmt:message bundle="${reg}" key="user_name_text"/>" required>
+                        <input type="text" name="login"
+                               placeholder="<fmt:message bundle="${reg}" key="user_name_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="em"/></span>
-                        <input type="text" name="email" placeholder="<fmt:message bundle="${reg}" key="em_text"/>" required>
+                        <input type="text" name="email" placeholder="<fmt:message bundle="${reg}" key="em_text"/>"
+                               required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="ph"/></span>
-                        <input type="tel" name="phone" placeholder="<fmt:message bundle="${reg}" key="ph_text"/>" required>
+                        <input type="tel" name="phone" placeholder="<fmt:message bundle="${reg}" key="ph_text"/>"
+                               required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="pass"/></span>
-                        <input type="password" name="password" placeholder="<fmt:message bundle="${reg}" key="pass_text"/>" required>
+                        <input type="password" name="password"
+                               placeholder="<fmt:message bundle="${reg}" key="pass_text"/>" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><fmt:message bundle="${reg}" key="conf_pass"/></span>
-                        <input type="password" name="confirm_password" placeholder="<fmt:message bundle="${reg}" key="conf_pass_text"/>" required>
+                        <input id="confirm" message="<fmt:message bundle="${reg}" key="error_confirm_pass"/>"
+                               type="password" name="confirm_password"
+                               placeholder="<fmt:message bundle="${reg}" key="conf_pass_text"/>" required>
                     </div>
                 </div>
                 <div class="gender-details">

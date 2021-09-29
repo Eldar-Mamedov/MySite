@@ -1,6 +1,7 @@
 package com.epam.mysite.engine.controller.impl;
 
 import com.epam.mysite.domain.entity.content.ServicesEntity;
+import com.epam.mysite.domain.webservice.content.ServiceItem;
 import com.epam.mysite.domain.webservice.content.Services;
 import com.epam.mysite.engine.controller.api.IServicesController;
 import com.epam.mysite.engine.database.repository.content.api.IServicesRepository;
@@ -29,5 +30,13 @@ public class ServicesController implements IServicesController {
             services = new ArrayList<>();
         }
         return services;
+    }
+
+    @Override
+    public List<ServiceItem> getAllServiceItems() {
+        List<Services> services = getAllServices();
+        List<ServiceItem> serviceItems = new ArrayList<>();
+        services.forEach(service -> serviceItems.addAll(service.getServiceItems()));
+        return serviceItems;
     }
 }

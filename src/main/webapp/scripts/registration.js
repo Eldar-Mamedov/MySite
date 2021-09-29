@@ -5,11 +5,15 @@ $("form").submit(function (event) {
 
 function register(url, alertMessage) {
     let form = $("form");
-    let jsonFormData = getJsonFormData(form);
-    request(url, "POST", jsonFormData, alertMessage);
+    let formData = getFormData(form);
+    if (formData.confirm_password !== formData.password) {
+        alert($("#confirm").attr("message"));
+        return;
+    }
+    request(url, "POST", JSON.stringify(formData), alertMessage);
 }
 
-function getJsonFormData(form) {
+function getFormData(form) {
     let un_indexed_array = form.serializeArray();
     let indexed_array = {};
 
@@ -17,7 +21,7 @@ function getJsonFormData(form) {
         indexed_array[n['name']] = n['value'];
     });
 
-    return JSON.stringify(indexed_array);
+    return indexed_array;
 }
 
 function request(url, method, data, alertMessage) {

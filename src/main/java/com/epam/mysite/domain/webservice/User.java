@@ -3,6 +3,7 @@ package com.epam.mysite.domain.webservice;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -14,6 +15,8 @@ public class User {
     private String login;
     private String password;
     private String gender;
+    private String role;
+    private List<Integer> serviceIds;
 
     public User() {
     }
@@ -72,5 +75,21 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<Integer> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<Integer> serviceIds) {
+        this.serviceIds = serviceIds;
     }
 }

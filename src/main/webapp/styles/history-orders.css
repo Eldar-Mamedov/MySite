@@ -1,25 +1,110 @@
-* {
-    box-sizing: border-box;
+.columns {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
 }
 
-.order-history table {
-    display: grid;
-    border-collapse: collapse;
+.columns > div {
     min-width: 100%;
-    grid-template-columns:
-    minmax(150px, 1fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr)
-    minmax(150px, 1.67fr);
 }
 
-.order-history thead, tbody , tr {
-    padding: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.column__header {
+    display: flex;
+    align-items: normal;
+    background: #6c7ae0;
+    height: 60px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
 }
+
+.column__header > span {
+    display: inline-block;
+    flex: 1 1 auto;
+    padding: 0 5px;
+}
+
+.column-items {
+    display: flex;
+    align-items: normal;
+    padding: 20px 0;
+}
+
+.column__data > .column-items {
+    min-width: 100%;
+}
+
+.column-items > span {
+    display: inline-block;
+    flex: 1 1 auto;
+    padding: 0 5px;
+}
+
+.column__data:nth-child(even) .column-items {
+    background: #f8f6ff;
+}
+
+.column-items:hover {
+    opacity: 0.5;
+}
+
+.column__data {
+    position: relative;
+}
+
+.item_btn {
+    position: absolute;
+    top: 0;
+    right: -10%;
+    background: #2691d9;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 0 5px;
+    border: 0;
+    border-radius: 20%;
+    height: 50px;
+}
+
+.item_btn:hover {
+    opacity: 0.5;
+}
+
+.details {
+    display: none;
+}
+
+.detail_item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.detail_item > h2 {
+    text-align: center;
+}
+
+.item_details {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.no-order__message {
+    margin-top: 30px;
+    border-radius: 60px;
+    background: #f3f3f3;
+    height: 40vh;
+    position: relative;
+}
+
+.message {
+    position: absolute;
+    left: 37%;
+    top: 50%;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 20px;
+}
+

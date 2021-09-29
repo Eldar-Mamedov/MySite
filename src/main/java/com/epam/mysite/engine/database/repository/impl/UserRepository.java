@@ -9,6 +9,7 @@ import com.epam.mysite.engine.database.repository.api.IUserRepository;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.*;
+import java.util.List;
 
 import static com.epam.mysite.util.converter.EntityConverter.convert;
 
@@ -84,6 +85,33 @@ public class UserRepository implements IUserRepository {
         return true;
     }
 
+    @Override
+    public boolean delete(List<Integer> userIds) throws SQLException {
+        PreparedStatement ps = null;
+        try {
+            connection.setAutoCommit(false);
+            connection.commit();
+            ps = connection.prepareStatement(UserQuery.REMOVE_USER_BY_ID.getQuery());
+            for (Integer id : userIds) {
+                ps.setInt(1, id);
+                ps.addBatch();
+            }
+            int[] orders = ps.executeBatch();
+            for (int i : orders) {
+                if (i != 1) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            log.info(e.toString());
+            connection.rollback();
+            throw e;
+        } finally {
+            closePreparedStatement(ps);
+            connection.setAutoCommit(true);
+        }
+        return true;
+    }
 
     private void closePreparedStatement(PreparedStatement preparedStatement) {
         if (preparedStatement != null) {

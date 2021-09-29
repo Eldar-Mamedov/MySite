@@ -1,23 +1,28 @@
-package com.epam.mysite.domain.entity.content;
+package com.epam.mysite.domain.entity.content.order;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ClientOrderMainPartEntity {
     private int id;
     @SerializedName("service_name")
     private String serviceName;
     @SerializedName("date_order")
-    private Timestamp dateOrder;
+    private String dateOrder;
     @SerializedName("date_service")
-    private Timestamp dateService;
+    private String dateService;
     private int total;
     private String status;
     @SerializedName("parent_order_id")
     private String parentOrderId;
+    private final Map<String, List<OrderDetailsEntity>> detailsEntityMap;
 
     public ClientOrderMainPartEntity() {
+        detailsEntityMap = new HashMap<>();
     }
 
     public int getId() {
@@ -36,19 +41,19 @@ public class ClientOrderMainPartEntity {
         this.serviceName = serviceName;
     }
 
-    public Timestamp getDateOrder() {
+    public String getDateOrder() {
         return dateOrder;
     }
 
-    public void setDateOrder(Timestamp dateOrder) {
+    public void setDateOrder(String dateOrder) {
         this.dateOrder = dateOrder;
     }
 
-    public Timestamp getDateService() {
+    public String getDateService() {
         return dateService;
     }
 
-    public void setDateService(Timestamp dateService) {
+    public void setDateService(String dateService) {
         this.dateService = dateService;
     }
 
@@ -74,5 +79,16 @@ public class ClientOrderMainPartEntity {
 
     public void setParentOrderId(String parentOrderId) {
         this.parentOrderId = parentOrderId;
+    }
+
+    public void putOrderDetail(String categoryName, OrderDetailsEntity orderDetailsEntity) {
+        if (!detailsEntityMap.containsKey(categoryName)) {
+            detailsEntityMap.put(categoryName, new ArrayList<>());
+        }
+        detailsEntityMap.get(categoryName).add(orderDetailsEntity);
+    }
+
+    public Map<String, List<OrderDetailsEntity>> getDetailsEntityMap() {
+        return detailsEntityMap;
     }
 }

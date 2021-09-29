@@ -25,6 +25,7 @@ public class SecurityConfig {
         masterUrls.add("/profile");
         masterUrls.add("/orders");
         masterUrls.add("/logout");
+        masterUrls.add("/update-order");
         mapConfig.put(Role.Master, masterUrls);
 
         List<String> adminUrls = new ArrayList<>();
@@ -32,6 +33,8 @@ public class SecurityConfig {
         adminUrls.add("/orders");
         adminUrls.add("/admin");
         adminUrls.add("/logout");
+        adminUrls.add("/process-order");
+        adminUrls.add("/cancel-order");
         mapConfig.put(Role.Admin, adminUrls);
     }
 
