@@ -34,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         User user = RequestConverter.convertFromBody(req, User.class);
         Response response = userController.saveUser(user, Role.Client);
-        if (response.getStatus() == 200) {
+        if (response.getStatus() == 201) {
             response.setRedirect(String.format("%s/login", getServletContext().getContextPath()));
         }
         sendResponse(resp, response);

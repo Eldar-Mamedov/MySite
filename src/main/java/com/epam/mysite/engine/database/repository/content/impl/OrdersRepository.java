@@ -35,7 +35,6 @@ public class OrdersRepository implements IOrdersRepository {
         String parentOrderId = UUID.randomUUID().toString();
         try {
             connection.setAutoCommit(false);
-            connection.commit();
             ps = connection.prepareStatement(OrdersQuery.INSERT_CLIENT_ORDER.getQuery());
             for (String service : createOrder.getServices()) {
                 ps.setTimestamp(1, createOrder.getDateTime());
@@ -46,6 +45,7 @@ public class OrdersRepository implements IOrdersRepository {
                 ps.addBatch();
             }
             int[] orders = ps.executeBatch();
+            connection.commit();
             for (int i : orders) {
                 if (i != 1) {
                     return false;

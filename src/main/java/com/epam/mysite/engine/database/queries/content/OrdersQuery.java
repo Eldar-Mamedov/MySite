@@ -35,11 +35,12 @@ public enum OrdersQuery {
             "where u.login = ? AND o.parent_order_id = ?;"),
     GET_ORDER_FOR_MASTER("select\n" +
             "o.id,\n" +
-            "(\n" +
-            "SELECT service_name from service_item\n" +
-            "join (SELECT same_item_id from service_item WHERE id = o.id) s on s.same_item_id = service_item.same_item_id\n" +
-            "join service_category sc on sc.id = service_item.category_id\n" +
-            "where service_item.locale = ?\n" +
+            "( \n" +
+            "SELECT service_name from service_item ssi\n" +
+            "join (SELECT service_item.same_item_id FROM service_item\n" +
+            "WHERE o.service_item_id = service_item.id\n" +
+            ") sssi on sssi.same_item_id = ssi.same_item_id\n" +
+            "WHERE locale = ?\n" +
             ") as service_name,\n" +
             "o.date_service,\n" +
             "si.price,\n" +
