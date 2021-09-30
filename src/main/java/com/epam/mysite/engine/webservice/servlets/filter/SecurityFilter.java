@@ -37,6 +37,7 @@ public class SecurityFilter implements Filter {
         if (loggedInUser != null) {
             String login = loggedInUser.getLogin();
             Cookie roleCookie = WebUtils.getRoleCookie(request);
+            response.addCookie(roleCookie);
             wrapRequest = new UserRoleRequestWrapper(login, Role.valueOf(roleCookie.getValue()), request);
         }
 

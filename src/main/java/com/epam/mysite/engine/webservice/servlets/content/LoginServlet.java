@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
             user = userController.getLoggedUser();
             response.setRedirect(String.format("%s/main", getServletContext().getContextPath()));
             Role role = roleController.getUserRole(user);
+            user.setRole(role.name());
             Cookie roleCookie = new Cookie("Role", role.name());
             roleCookie.setMaxAge(60 * 30);
             Cookie userCookie = new Cookie("User", user.getLogin());
